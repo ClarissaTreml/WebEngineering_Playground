@@ -1,16 +1,31 @@
-import { extractBears } from './extractingBears.js';
+import { extractBears } from './extractingBears';
 
 const baseUrl = "https://en.wikipedia.org/w/api.php";
 const title = "List_of_ursids";
 
-export const fetchImageUrl = async (fileName) => {
+interface ImageInfo {
+    url: string;
+}
+
+interface Page {
+    imageinfo: ImageInfo[];
+}
+
+interface QueryResponse {
+    query: {
+        pages: { [key: string]: Page };
+    };
+}
+
+
+export const fetchImageUrl = async (fileName: string): Promise<string> => {
     const imageParams = {
         action: "query",
         titles: `File:${fileName}`,
         prop: "imageinfo",
         iiprop: "url",
         format: "json",
-        origin: "*"
+        origin: "*",
     };
 
     const url = `${baseUrl}?${new URLSearchParams(imageParams).toString()}`;
@@ -20,7 +35,11 @@ export const fetchImageUrl = async (fileName) => {
         if (!res.ok) {
             throw new Error(`Failed to fetch image URL for ${fileName}`);
         }
-        const data = await res.json();
+
+        // Step 2: Cast the JSON response as QueryResponse
+        const data: QueryResponse = await res.json();
+
+        // Step 3: Access the pages object and get the URL
         const pages = data.query.pages;
         return Object.values(pages)[0].imageinfo[0].url;
 
@@ -30,14 +49,14 @@ export const fetchImageUrl = async (fileName) => {
     }
 };
 
-export const getBearData = async () => {
+export const getBearData = async (): Promise<void> => {
     const params = {
         action: "parse",
         page: title,
         prop: "wikitext",
         section: "3",
         format: "json",
-        origin: "*"
+        origin: "*",
     };
 
     const url = `${baseUrl}?${new URLSearchParams(params).toString()}`;
@@ -47,7 +66,7 @@ export const getBearData = async () => {
         if (!res.ok) {
             throw new Error('Failed to fetch bear data.');
         }
-        const data = await res.json();
+        const data: any = await res.json();
         const wikitext = data.parse.wikitext['*'];
         await extractBears(wikitext);
 

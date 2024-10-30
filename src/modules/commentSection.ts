@@ -1,6 +1,6 @@
-export const toggleComments = () => {
-    const showHideBtn = document.querySelector('.show-hide');
-    const commentWrapper = document.querySelector('.comment-wrapper');
+export const toggleComments = (): void => {
+    const showHideBtn = document.querySelector('.show-hide') as HTMLElement | null;
+    const commentWrapper = document.querySelector('.comment-wrapper') as HTMLElement | null;
     if (!showHideBtn || !commentWrapper) return;
 
     commentWrapper.classList.add('hidden');
@@ -17,23 +17,21 @@ export const toggleComments = () => {
     });
 };
 
-export const addComment = () => {
-    const form = document.querySelector('.comment-form');
-    const nameField = document.querySelector('#name');
-    const commentField = document.querySelector('#comment');
-    const list = document.querySelector('.comment-container');
-    if (!form || !nameField || !commentField || !list) return;  // Check if elements exist
+export const addComment = (): void => {
+    const form = document.querySelector('.comment-form') as HTMLFormElement | null;
+    const nameField = document.querySelector('#name') as HTMLInputElement | null;
+    const commentField = document.querySelector('#comment') as HTMLInputElement | null;
+    const list = document.querySelector('.comment-container') as HTMLElement | null;
+    if (!form || !nameField || !commentField || !list) return;
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', (e: Event) => {
         e.preventDefault();
         const listItem = document.createElement('li');
         const namePara = document.createElement('p');
         const commentPara = document.createElement('p');
-        const nameValue = nameField.value;
-        const commentValue = commentField.value;
 
-        namePara.textContent = nameValue;
-        commentPara.textContent = commentValue;
+        namePara.textContent = nameField.value;
+        commentPara.textContent = commentField.value;
 
         list.appendChild(listItem);
         listItem.appendChild(namePara);
