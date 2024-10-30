@@ -1,20 +1,20 @@
 export const toggleComments = () => {
     const showHideBtn = document.querySelector('.show-hide');
     const commentWrapper = document.querySelector('.comment-wrapper');
-    if (!showHideBtn || !commentWrapper) return;  // Check if elements exist
+    if (!showHideBtn || !commentWrapper) return;
 
-    commentWrapper.style.display = 'none';
+    commentWrapper.classList.add('hidden');
 
-    showHideBtn.onclick = () => {
-        const showHideText = showHideBtn.textContent;
-        if (showHideText === 'Show comments') {
+    showHideBtn.addEventListener('click', () => {
+        const isHidden = commentWrapper.classList.contains('hidden');
+        if (isHidden) {
             showHideBtn.textContent = 'Hide comments';
-            commentWrapper.style.display = 'block';
+            commentWrapper.classList.remove('hidden');
         } else {
             showHideBtn.textContent = 'Show comments';
-            commentWrapper.style.display = 'none';
+            commentWrapper.classList.add('hidden');
         }
-    };
+    });
 };
 
 export const addComment = () => {
@@ -24,7 +24,7 @@ export const addComment = () => {
     const list = document.querySelector('.comment-container');
     if (!form || !nameField || !commentField || !list) return;  // Check if elements exist
 
-    form.onsubmit = (e) => {
+    form.addEventListener('submit', (e) => {
         e.preventDefault();
         const listItem = document.createElement('li');
         const namePara = document.createElement('p');
@@ -41,5 +41,5 @@ export const addComment = () => {
 
         nameField.value = '';
         commentField.value = '';
-    };
+    });
 };
