@@ -1,6 +1,6 @@
 import { fetchImageUrl } from './fetchingData.js';
 
-const extractBears = async (wikitext) => {
+export const extractBears = async (wikitext) => {
     const speciesTables = wikitext.split('{{Species table/end}}');
     const bears = [];
 
@@ -45,5 +45,3 @@ const extractBears = async (wikitext) => {
         });
     }
 };
-
-export { extractBears };

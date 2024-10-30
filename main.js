@@ -4,5 +4,10 @@ import { addComment, toggleComments } from './modules/commentSection.js';
 document.addEventListener('DOMContentLoaded', async () => {
     toggleComments();
     addComment();
-    await getBearData();
+
+    try {
+        await getBearData();
+    } catch (error) {
+        console.error('Error loading bear data:', error);
+    }
 });

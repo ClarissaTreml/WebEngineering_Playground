@@ -1,4 +1,4 @@
-const toggleComments = () => {
+export const toggleComments = () => {
     const showHideBtn = document.querySelector('.show-hide');
     const commentWrapper = document.querySelector('.comment-wrapper');
     if (!showHideBtn || !commentWrapper) return;  // Check if elements exist
@@ -17,7 +17,7 @@ const toggleComments = () => {
     };
 };
 
-const addComment = () => {
+export const addComment = () => {
     const form = document.querySelector('.comment-form');
     const nameField = document.querySelector('#name');
     const commentField = document.querySelector('#comment');
@@ -43,6 +43,3 @@ const addComment = () => {
         commentField.value = '';
     };
 };
-
-export {toggleComments, addComment}
-

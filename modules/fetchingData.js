@@ -3,7 +3,7 @@ import { extractBears } from './extractingBears.js';
 const baseUrl = "https://en.wikipedia.org/w/api.php";
 const title = "List_of_ursids";
 
-const fetchImageUrl = async (fileName) => {
+export const fetchImageUrl = async (fileName) => {
     const imageParams = {
         action: "query",
         titles: `File:${fileName}`,
@@ -30,7 +30,7 @@ const fetchImageUrl = async (fileName) => {
     }
 };
 
-const getBearData = async () => {
+export const getBearData = async () => {
     const params = {
         action: "parse",
         page: title,
@@ -55,5 +55,3 @@ const getBearData = async () => {
         console.error('An error occurred when fetching the bear data:', error);
     }
 };
-
-export { fetchImageUrl, getBearData };
