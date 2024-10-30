@@ -111,8 +111,158 @@ Apply the following ruleset for Prettier:
 ```
 
 >  **What improvements in your codebase were introduced by using TS instead of JS? Name at least 3 and explain why.**
+## Code Review: Identified Bad Coding Practices and Fixes
 
-Present your findings here...
+### 1. **Direct DOM Manipulation Outside Functions**
+**Bad Practice**: Accessing and manipulating DOM elements directly outside of functions
+or event listeners can lead to errors if the elements are not available when the script runs.
+
+```javascript
+// Bad practice: DOM elements accessed outside a function or event listener
+const showHideBtn = document.querySelector('.show-hide');
+const commentWrapper = document.querySelector('.comment-wrapper');
+```
+
+**Fix**: We encapsulated DOM queries within functions like toggleComments and
+addComment in commentSection.js and ensured these functions only run after
+the DOM is fully loaded by initializing them inside a DOMContentLoaded event in main.js.
+
+```javascript
+// Good practice: Initialize DOM elements inside the function and run it after DOMContentLoaded
+export const toggleComments = () => {
+const showHideBtn = document.querySelector('.show-hide');
+const commentWrapper = document.querySelector('.comment-wrapper');
+if (!showHideBtn || !commentWrapper) return;
+    // ...
+};
+```
+
+### 2. **Ignoring Returned Promises**
+**Bad Practice**: Ignoring promises returned by async functions can lead to unhandled rejections and unexpected behavior.
+
+```javascript
+// Bad practice: Ignoring a promise returned by an async function
+getBearData();
+```
+
+**Fix**: We used await in main.js to handle the promise returned by getBearData,
+ensuring that any asynchronous tasks complete before moving forward. 
+This also allows for easier error handling using try/catch.
+
+```javascript
+// Good practice: Use await to handle the promise
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        await getBearData();
+    } catch (error) {
+        console.error('Error loading bear data:', error);
+    }
+});
+```
+
+### 3. **Using `.then()` Instead of `async/await`**
+**Bad Practice**: Using .then() chaining instead of async/await can make the code
+harder to read and maintain, especially when dealing with multiple asynchronous operations.
+
+```javascript
+// Bad practice: Using .then() to handle asynchronous operations
+fetchImageUrl(fileName).then((imageUrl) => {
+    // handle imageUrl
+});
+```
+**Fix**: We refactored code in fetchingData.js and extractingBears.js to use async/await 
+instead of .then(). This improves readability by handling asynchronous code in a more linear fashion.
+
+```javascript
+// Good practice: Using async/await for asynchronous operations
+const imageUrl = await fetchImageUrl(fileName);
+```
+
+
+### 4. **Inline Style Manipulation**
+**Bad Practice**: Directly setting inline styles in JavaScript can make the code harder to maintain and override with CSS.
+
+```javascript
+// Bad practice: Setting inline styles in JavaScript
+commentWrapper.style.display = 'none';
+```
+
+**Fix**:
+We used CSS classes in style.css to control the visibility of elements,
+toggling classes in JavaScript instead of setting styles directly.
+```javascript
+// Good practice: Use CSS classes and toggle them in JavaScript
+commentWrapper.classList.add('hidden');  // Define .hidden { display: none; } in CSS
+```
+
+### 5. **Replacing `.onclick` and `.onsubmit` with `addEventListener`**
+**Bad Practice**: Using `.onclick` and `.onsubmit` directly limits each element to a single event handler,
+which can cause issues if additional event listeners are needed in the future. It also lacks modularity and flexibility.
+
+```javascript
+// Bad practice: Using .onclick directly, which limits to a single event handler
+showHideBtn.onclick = () => {
+    const showHideText = showHideBtn.textContent;
+    // Logic for toggling comments
+};
+```
+**Fix**:  Use addEventListener instead, which allows for multiple event listeners on the same element,
+improving modularity and maintainability.
+
+```javascript
+// Good practice: Using addEventListener for better modularity and flexibility
+showHideBtn.addEventListener('click', () => {
+    const showHideText = showHideBtn.textContent;
+    // Logic for toggling comments
+});
+
+```
+
+### 6. **Removing `<font>` Tags and Using CSS for Font Styling**
+**Bad Practice**: Using `<font>` tags with `size` attributes in HTML is outdated
+and makes it difficult to maintain a consistent design. Inline styling should
+generally be avoided in favor of CSS classes, which are easier to update and
+provide better separation of concerns.
+
+```html
+<!-- Bad Practice: Using <font> tags for styling -->
+<font size="7">Welcome to our wildlife website</font>
+<font size="6">Add comment</font>
+<font size="5">Types of bear</font>
+```
+
+**Fix**: Replace <font> tags with semantic elements (like <span>) and
+use CSS classes for font sizes. This keeps the HTML clean and
+allows for centralized styling in style.css.
+
+```html
+<!-- Good Practice: Use CSS classes for styling -->
+<span class="font-size-7">Welcome to our wildlife website</span>
+<span class="font-size-6">Add comment</span>
+<span class="font-size-5">Types of bear</span>
+```
+
+### 7. **Adding `alt` Attributes to Images**
+**Bad Practice**: Not including `alt` attributes on images can make
+the website less accessible. Screen readers rely on alt text to describe
+images to users who are visually impaired, and search engines also
+use this text to understand image content.
+
+```html
+<!-- Bad Practice: Images without alt attributes -->
+<img src="media/wild-bear.jpg">
+<img src="media/urban-bear.jpg">
+```
+
+**Fix**: Provide descriptive alt attributes to help screen readers and
+improve accessibility. Descriptions should accurately represent the content of the images.
+
+```html
+<!-- Good Practice: Images with descriptive alt attributes -->
+<img src="media/wild-bear.jpg" alt="image of a wild bear">
+<img src="media/urban-bear.jpg" alt="image of an urban bear">
+```
+
 
 ## 3.	CI/CD Pipeline Playground (5 Pts.)
 Implementation of a CI/CD pipeline to automate the development and deployment process – write automated tests.
