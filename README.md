@@ -195,8 +195,8 @@ use this text to understand image content.
 
 ```html
 <!-- Bad Practice: Images without alt attributes -->
-<img src="media/wild-bear.jpg">
-<img src="media/urban-bear.jpg">
+<img src="src/media/wild-bear.jpg">
+<img src="src/media/urban-bear.jpg">
 ```
 
 **Fix**: Provide descriptive alt attributes to help screen readers and
@@ -204,8 +204,8 @@ improve accessibility. Descriptions should accurately represent the content of t
 
 ```html
 <!-- Good Practice: Images with descriptive alt attributes -->
-<img src="media/wild-bear.jpg" alt="image of a wild bear">
-<img src="media/urban-bear.jpg" alt="image of an urban bear">
+<img src="src/media/wild-bear.jpg" alt="image of a wild bear">
+<img src="src/media/urban-bear.jpg" alt="image of an urban bear">
 ```
 
 ``` JS
