@@ -13,7 +13,7 @@ interface Page {
 
 interface QueryResponse {
   query: {
-    pages: { [key: string]: Page };
+    pages: Record<string, Page>;
   };
 }
 

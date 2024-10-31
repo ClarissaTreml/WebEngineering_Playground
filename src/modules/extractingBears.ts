@@ -38,9 +38,7 @@ export const extractBears = async (wikitext: string): Promise<void> => {
     }
   }
 
-  const moreBearsSection = document.querySelector(
-    '.more_bears'
-  ) as HTMLElement | null;
+  const moreBearsSection = document.querySelector('.more_bears');
   if (moreBearsSection) {
     bears.forEach((bear) => {
       moreBearsSection.innerHTML += `
