@@ -1,13 +1,12 @@
-import { getBearData } from './modules/fetchingData.js';
-import { addComment, toggleComments } from './modules/commentSection.js';
-
+import { getBearData } from './modules/fetchingData';
+import { addComment, toggleComments } from './modules/commentSection';
 document.addEventListener('DOMContentLoaded', async () => {
     toggleComments();
     addComment();
-
     try {
         await getBearData();
-    } catch (error) {
+    }
+    catch (error) {
         console.error('Error loading bear data:', error);
     }
 });

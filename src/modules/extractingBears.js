@@ -1,9 +1,7 @@
-import { fetchImageUrl } from './fetchingData.js';
-
+import { fetchImageUrl } from './fetchingData';
 export const extractBears = async (wikitext) => {
     const speciesTables = wikitext.split('{{Species table/end}}');
     const bears = [];
-
     for (const table of speciesTables) {
         const rows = table.split('{{Species table/row');
         for (const row of rows) {
@@ -11,27 +9,24 @@ export const extractBears = async (wikitext) => {
             const binomialMatch = row.match(/\|binomial=(.*?)\n/);
             const imageMatch = row.match(/\|image=(.*?)\n/);
             const rangeMatch = row.match(/\|range=(.*?)\n/);
-
             if (nameMatch && binomialMatch && imageMatch && rangeMatch) {
                 const fileName = imageMatch[1].trim().replace('File:', '');
-
                 try {
                     const imageUrl = await fetchImageUrl(fileName);
                     const bear = {
                         name: nameMatch[1],
                         binomial: binomialMatch[1],
                         image: imageUrl,
-                        range: rangeMatch[1].trim()
+                        range: rangeMatch[1].trim(),
                     };
                     bears.push(bear);
-
-                } catch (error) {
+                }
+                catch (error) {
                     console.error(`Error fetching image for ${nameMatch[1]}:`, error);
                 }
             }
         }
     }
-
     const moreBearsSection = document.querySelector('.more_bears');
     if (moreBearsSection) {
         bears.forEach((bear) => {

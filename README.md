@@ -195,8 +195,8 @@ use this text to understand image content.
 
 ```html
 <!-- Bad Practice: Images without alt attributes -->
-<img src="media/wild-bear.jpg">
-<img src="media/urban-bear.jpg">
+<img src="src/media/wild-bear.jpg">
+<img src="src/media/urban-bear.jpg">
 ```
 
 **Fix**: Provide descriptive alt attributes to help screen readers and
@@ -204,8 +204,8 @@ improve accessibility. Descriptions should accurately represent the content of t
 
 ```html
 <!-- Good Practice: Images with descriptive alt attributes -->
-<img src="media/wild-bear.jpg" alt="image of a wild bear">
-<img src="media/urban-bear.jpg" alt="image of an urban bear">
+<img src="src/media/wild-bear.jpg" alt="image of a wild bear">
+<img src="src/media/urban-bear.jpg" alt="image of an urban bear">
 ```
 
 ``` JS
@@ -262,6 +262,21 @@ Apply the following ruleset for Prettier:
 ```
 
 >  **What improvements in your codebase were introduced by using TS instead of JS? Name at least 3 and explain why.**
+
+**By migrating from JavaScript to TypeScript, the following improvements were introduced:**
+
+**Static Type Checking**:
+TypeScript identifies type-related errors at compile-time,
+which reduces runtime errors and makes the code more robust.
+
+**Improved Code Readability and Maintainability**:
+Type annotations and TypeScript’s type system make the code
+self-documenting and easier to understand, especially in large projects.
+
+**Enhanced IDE Support and Autocompletion**:
+TypeScript provides richer support in IDEs, including autocompletion
+and parameter hints, boosting developer productivity and
+reducing errors.
 
 
 ## 3.	CI/CD Pipeline Playground (5 Pts.)
