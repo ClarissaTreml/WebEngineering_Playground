@@ -7,11 +7,11 @@ on:
 
 jobs:
   common-tasks:
-    uses: ./.github/workflows/common-tasks.yml  # Reference the reusable workflow
+    uses: ./.github/workflows/common-tasks.yml
 
   build-and-deploy:
     runs-on: ubuntu-latest
-    needs: common-tasks  # Ensure this runs after common-tasks
+    needs: common-tasks
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
