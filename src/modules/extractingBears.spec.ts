@@ -1,6 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
 import { extractBears } from './extractingBears';
-import { fetchImageUrl } from './fetchingData';
 
 vi.mock('./fetchingData', () => ({
   fetchImageUrl: vi.fn().mockResolvedValue('mocked-image-url'),

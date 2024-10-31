@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   (async () => {
     try {
       await getBearData();
-    } catch (error: unknown) {
+    } catch (error) {
       console.error('Error loading bear data:', error);
     }
   })();
