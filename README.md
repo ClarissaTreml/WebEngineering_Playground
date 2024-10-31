@@ -56,61 +56,6 @@ Fix application code and answer the questions:
 
 >  **What bad coding practices did you find? Why is it a bad practice and how did you fix it?**
 
-Present your findings here...
-``` JS
-console.log('Make use of markdown codesnippets to show and explain good/bad practices!')
-```
-
-
-## 2. Dependency- and Build Management Playground (10 Pts.)
-Build the application with ``npm`` and a build and a dependency management tool of your choice (e.g. [Vite](https://vitejs.dev/), [Webpack](https://webpack.js.org/), or others). 
-
-Here are some additional resources: [Package Management and Bundling](https://github.com/leonardo1710/WebEngineeringSDE/wiki/2-Package-Management,-Build-Management-and-Modules), [Vite Tutorial](https://github.com/leonardo1710/WebEngineeringSDE/wiki/2.1-Vite-Web-Application-Setup), [Webpack Tutorial](https://github.com/leonardo1710/WebEngineeringSDE/wiki/2.2-Webpack-Web-Application-Setup).
-
-**Tasks:**
-* (1) Integrate `npm` and a build management tool into your project.
-* (2) Configure your project to use Typescript as your primary development language and adapt the code and file extensions respectively.
-* (2) Use ESLint and Prettier inside your project - rulesets can be found below.
-* (1) Keep your builds clear and add dependencies to the right build (e.g. do not add dev dependencies inside the production build and vice versa).
-* (1) Define the following tasks within `npm scripts`:
-  * `dev`: starts the development server
-  * `build`: runs the typescript compiler and bundles your application - bundling depends on your chosen build tool (e.g. Vite, Webpack) but typically bundles multiple files into one, applies optimizations like minification and obfuscation and outputs final results to a `dist` or `build` directory.
-  * `lint`: runs ESLint on all  `.js` and `.ts` files in your projects `/src` directory
-  * `lint:fix`: runs and also fixes all issues found by ESLint
-  * `format`: formats all `.js` and `.ts` files in your projects `/src` directory
-  * `format:check`: checks if the files in the `/src` directory are formatted according to Prettier's rules.
-* (1) Configure a pre-commit hook that lints and formats your code using [husky](https://typicode.github.io/husky/) and [lint-staged](https://github.com/lint-staged/lint-staged). A tutorial can be found [here](https://dev.to/shashwatnautiyal/complete-guide-to-eslint-prettier-husky-and-lint-staged-fh9).
-* (2) Answer the question at the end of this section inside ``Readme.md`` file: 
-
-
-**ESLint Configurations**
-
-Use ESLint configs [standard-with-typescript](https://www.npmjs.com/package/eslint-config-standard-with-typescript) and [TypeScript ESLint Plugin](https://www.npmjs.com/package/@typescript-eslint/eslint-plugin).
-Your `.eslintrc` file should have the following extensions:
-```.eslintrc.yml
-...
-extends:
-  - standard-with-typescript
-  - plugin:@typescript-eslint/recommended
-  - plugin:prettier/recommended
-  - prettier
-...
-```
- 
-**Prettier Configurations**
-
-Apply the following ruleset for Prettier:
-``` .prettierrc
-{
-  "semi": true,
-  "singleQuote": true,
-  "trailingComma": "es5",
-  "tabWidth": 2,
-  "printWidth": 80
-}
-```
-
->  **What improvements in your codebase were introduced by using TS instead of JS? Name at least 3 and explain why.**
 ## Code Review: Identified Bad Coding Practices and Fixes
 
 ### 1. **Direct DOM Manipulation Outside Functions**
@@ -146,7 +91,7 @@ getBearData();
 ```
 
 **Fix**: We used await in main.js to handle the promise returned by getBearData,
-ensuring that any asynchronous tasks complete before moving forward. 
+ensuring that any asynchronous tasks complete before moving forward.
 This also allows for easier error handling using try/catch.
 
 ```javascript
@@ -170,7 +115,7 @@ fetchImageUrl(fileName).then((imageUrl) => {
     // handle imageUrl
 });
 ```
-**Fix**: We refactored code in fetchingData.js and extractingBears.js to use async/await 
+**Fix**: We refactored code in fetchingData.js and extractingBears.js to use async/await
 instead of .then(). This improves readability by handling asynchronous code in a more linear fashion.
 
 ```javascript
@@ -262,6 +207,61 @@ improve accessibility. Descriptions should accurately represent the content of t
 <img src="media/wild-bear.jpg" alt="image of a wild bear">
 <img src="media/urban-bear.jpg" alt="image of an urban bear">
 ```
+
+``` JS
+console.log('Make use of markdown codesnippets to show and explain good/bad practices!')
+```
+
+
+## 2. Dependency- and Build Management Playground (10 Pts.)
+Build the application with ``npm`` and a build and a dependency management tool of your choice (e.g. [Vite](https://vitejs.dev/), [Webpack](https://webpack.js.org/), or others). 
+
+Here are some additional resources: [Package Management and Bundling](https://github.com/leonardo1710/WebEngineeringSDE/wiki/2-Package-Management,-Build-Management-and-Modules), [Vite Tutorial](https://github.com/leonardo1710/WebEngineeringSDE/wiki/2.1-Vite-Web-Application-Setup), [Webpack Tutorial](https://github.com/leonardo1710/WebEngineeringSDE/wiki/2.2-Webpack-Web-Application-Setup).
+
+**Tasks:**
+* (1) Integrate `npm` and a build management tool into your project.
+* (2) Configure your project to use Typescript as your primary development language and adapt the code and file extensions respectively.
+* (2) Use ESLint and Prettier inside your project - rulesets can be found below.
+* (1) Keep your builds clear and add dependencies to the right build (e.g. do not add dev dependencies inside the production build and vice versa).
+* (1) Define the following tasks within `npm scripts`:
+  * `dev`: starts the development server
+  * `build`: runs the typescript compiler and bundles your application - bundling depends on your chosen build tool (e.g. Vite, Webpack) but typically bundles multiple files into one, applies optimizations like minification and obfuscation and outputs final results to a `dist` or `build` directory.
+  * `lint`: runs ESLint on all  `.js` and `.ts` files in your projects `/src` directory
+  * `lint:fix`: runs and also fixes all issues found by ESLint
+  * `format`: formats all `.js` and `.ts` files in your projects `/src` directory
+  * `format:check`: checks if the files in the `/src` directory are formatted according to Prettier's rules.
+* (1) Configure a pre-commit hook that lints and formats your code using [husky](https://typicode.github.io/husky/) and [lint-staged](https://github.com/lint-staged/lint-staged). A tutorial can be found [here](https://dev.to/shashwatnautiyal/complete-guide-to-eslint-prettier-husky-and-lint-staged-fh9).
+* (2) Answer the question at the end of this section inside ``Readme.md`` file: 
+
+
+**ESLint Configurations**
+
+Use ESLint configs [standard-with-typescript](https://www.npmjs.com/package/eslint-config-standard-with-typescript) and [TypeScript ESLint Plugin](https://www.npmjs.com/package/@typescript-eslint/eslint-plugin).
+Your `.eslintrc` file should have the following extensions:
+```.eslintrc.yml
+...
+extends:
+  - standard-with-typescript
+  - plugin:@typescript-eslint/recommended
+  - plugin:prettier/recommended
+  - prettier
+...
+```
+ 
+**Prettier Configurations**
+
+Apply the following ruleset for Prettier:
+``` .prettierrc
+{
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "tabWidth": 2,
+  "printWidth": 80
+}
+```
+
+>  **What improvements in your codebase were introduced by using TS instead of JS? Name at least 3 and explain why.**
 
 
 ## 3.	CI/CD Pipeline Playground (5 Pts.)
