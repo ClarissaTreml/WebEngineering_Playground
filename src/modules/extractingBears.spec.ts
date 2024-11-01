@@ -1,6 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
 import { extractBears } from './extractingBears';
-import { fetchImageUrl } from './fetchingData';
 
 vi.mock('./fetchingData', () => ({
   fetchImageUrl: vi.fn().mockResolvedValue('mocked-image-url'),
@@ -23,10 +22,14 @@ describe('extractBears', () => {
     await extractBears(wikitext);
 
     const moreBearsSection = document.querySelector('.more_bears');
-    expect(moreBearsSection).not.toBeNull();
-    expect(moreBearsSection!.innerHTML).toContain('Grizzly Bear');
-    expect(moreBearsSection!.innerHTML).toContain('Ursus arctos horribilis');
-    expect(moreBearsSection!.innerHTML).toContain('mocked-image-url');
-    expect(moreBearsSection!.innerHTML).toContain('North America');
+    if (moreBearsSection !== null) {
+      // Explicitly checking for null
+      expect(moreBearsSection.innerHTML).toContain('Grizzly Bear');
+      expect(moreBearsSection.innerHTML).toContain('Ursus arctos horribilis');
+      expect(moreBearsSection.innerHTML).toContain('mocked-image-url');
+      expect(moreBearsSection.innerHTML).toContain('North America');
+    } else {
+      throw new Error("Element '.more_bears' not found");
+    }
   });
 });

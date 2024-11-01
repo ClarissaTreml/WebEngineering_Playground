@@ -20,8 +20,12 @@ export const toggleComments = (): void => {
 export const addComment = (): void => {
   const form = document.querySelector('.comment-form');
   const nameField = document.querySelector('#name') as HTMLInputElement | null;
-  const commentField = document.querySelector('#comment') as HTMLInputElement | null;
-  const list = document.querySelector('.comment-container') as HTMLElement | null;
+  const commentField = document.querySelector(
+    '#comment'
+  ) as HTMLInputElement | null;
+  const list = document.querySelector(
+    '.comment-container'
+  ) as HTMLElement | null;
 
   if (form && nameField && commentField && list) {
     form.addEventListener('submit', (e: Event) => {
