@@ -17,6 +17,12 @@ interface QueryResponse {
   };
 }
 
+interface WikiData {
+  parse: {
+    wikitext: Record<string, string>;
+  };
+}
+
 export const fetchImageUrl = async (fileName: string): Promise<string> => {
   const imageParams = {
     action: 'query',
@@ -60,12 +66,13 @@ export const getBearData = async (): Promise<void> => {
   const url = `${baseUrl}?${new URLSearchParams(params).toString()}`;
 
   try {
-    const res = await fetch(url);
+    const res: Response = await fetch(url);
     if (!res.ok) {
       throw new Error('Failed to fetch bear data.');
     }
-    const data: any = await res.json();
-    const wikitext = data.parse.wikitext['*'];
+
+    const data: WikiData = await res.json(); // Use the defined interface instead of `any`
+    const wikitext: string = data.parse.wikitext['*']; // TypeScript recognizes this as a string
     await extractBears(wikitext);
   } catch (error) {
     console.error('An error occurred when fetching the bear data:', error);

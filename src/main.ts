@@ -5,10 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
   toggleComments();
   addComment();
 
-  (async () => {
+  void (async () => {
     try {
       await getBearData();
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Error loading bear data:', error);
     }
   })();

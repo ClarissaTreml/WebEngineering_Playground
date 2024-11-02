@@ -19,11 +19,16 @@ export const extractBears = async (wikitext: string): Promise<void> => {
       const imageMatch = row.match(/\|image=(.*?)\n/);
       const rangeMatch = row.match(/\|range=(.*?)\n/);
 
-      if (nameMatch && binomialMatch && imageMatch && rangeMatch) {
-        const fileName = imageMatch[1].trim().replace('File:', '');
+      if (
+        nameMatch !== null &&
+        binomialMatch !== null &&
+        imageMatch !== null &&
+        rangeMatch !== null
+      ) {
+        const fileName: string = imageMatch[1].trim().replace('File:', '');
 
         try {
-          const imageUrl = await fetchImageUrl(fileName);
+          const imageUrl: string = await fetchImageUrl(fileName);
           const bear: Bear = {
             name: nameMatch[1],
             binomial: binomialMatch[1],
@@ -39,15 +44,15 @@ export const extractBears = async (wikitext: string): Promise<void> => {
   }
 
   const moreBearsSection = document.querySelector('.more_bears');
-  if (moreBearsSection) {
-    bears.forEach((bear) => {
-      moreBearsSection.innerHTML += `
-                <div>
-                    <h3>${bear.name} (${bear.binomial})</h3>
-                    <img src="${bear.image}" alt="${bear.name}" style="width:200px; height:auto;">
-                    <p><strong>Range:</strong> ${bear.range}</p>
-                </div>
-            `;
+  if (moreBearsSection !== null) {
+    bears.forEach((bear: Bear) => {
+      (moreBearsSection as HTMLElement).innerHTML += `
+      <div>
+        <h3>${bear.name} (${bear.binomial})</h3>
+        <img src="${bear.image}" alt="${bear.name}" style="...">
+        <p><strong>Range:</strong> ${bear.range}</p>
+      </div>
+    `;
     });
   }
 };
