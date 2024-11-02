@@ -1,11 +1,10 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  root: '.',
+  base: '/WebEngineering_Playground/',
   build: {
-    outDir: 'dist',
-  },
-  server: {
-    open: true,
+    rollupOptions: {
+      input: './index.html',
+    },
   },
 });
