@@ -1,7 +1,10 @@
-import { defineConfig } from 'vitest/config';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
-  test: {
-    environment: 'jsdom',
+  base: '/WebEngineering_Playground/',
+  build: {
+    rollupOptions: {
+      input: './index.html',
+    },
   },
 });
