@@ -2,8 +2,8 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { toggleComments } from './commentSection';
 
 describe('toggleComments', () => {
-  let showHideBtn: HTMLButtonElement;
-  let commentWrapper: HTMLElement;
+  let showHideBtn: HTMLButtonElement | null;
+  let commentWrapper: HTMLElement | null;
 
   beforeEach((): void => {
     document.body.innerHTML = `
@@ -11,22 +11,25 @@ describe('toggleComments', () => {
       <div class="comment-wrapper hidden"></div>
     `;
 
-    // Use `!` to assert non-null after querying the elements.
-    showHideBtn = document.querySelector('.show-hide')!;
-    commentWrapper = document.querySelector('.comment-wrapper')!;
+    showHideBtn = document.querySelector<HTMLButtonElement>('.show-hide');
+    commentWrapper = document.querySelector<HTMLElement>('.comment-wrapper');
+
+    if (showHideBtn === null || commentWrapper === null) {
+      throw new Error('Required elements not found in the DOM');
+    }
   });
 
   it('should toggle the visibility of the comment section', (): void => {
-    toggleComments();
+    if (showHideBtn !== null && commentWrapper !== null) {
+      toggleComments();
 
-    // Simulate a button click to show comments
-    showHideBtn.click();
-    expect(showHideBtn.textContent).toBe('Hide comments');
-    expect(commentWrapper.classList.contains('hidden')).toBe(false);
+      showHideBtn.click();
+      expect(showHideBtn.textContent).toBe('Hide comments');
+      expect(commentWrapper.classList.contains('hidden')).toBe(false);
 
-    // Simulate a button click to hide comments
-    showHideBtn.click();
-    expect(showHideBtn.textContent).toBe('Show comments');
-    expect(commentWrapper.classList.contains('hidden')).toBe(true);
+      showHideBtn.click();
+      expect(showHideBtn.textContent).toBe('Show comments');
+      expect(commentWrapper.classList.contains('hidden')).toBe(true);
+    }
   });
 });

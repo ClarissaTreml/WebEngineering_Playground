@@ -1,7 +1,9 @@
 export const toggleComments = (): void => {
   const showHideBtn = document.querySelector('.show-hide');
   const commentWrapper = document.querySelector('.comment-wrapper');
-  if (!showHideBtn || !commentWrapper) return;
+  if (showHideBtn == null || commentWrapper == null) {
+    return;
+  }
 
   commentWrapper.classList.add('hidden');
 
@@ -18,23 +20,23 @@ export const toggleComments = (): void => {
 };
 
 export const addComment = (): void => {
-  const form = document.querySelector('.comment-form');
-  const nameField = document.querySelector('#name') as HTMLInputElement | null;
-  const commentField = document.querySelector(
-    '#comment'
-  ) as HTMLInputElement | null;
-  const list = document.querySelector(
-    '.comment-container'
-  ) as HTMLElement | null;
+  const form = document.querySelector<HTMLFormElement>('.comment-form');
+  const nameField = document.querySelector<HTMLInputElement>('#name');
+  const commentField = document.querySelector<HTMLInputElement>('#comment');
+  const list = document.querySelector<HTMLElement>('.comment-container');
 
-  if (form && nameField && commentField && list) {
+  if (
+    form != null &&
+    nameField != null &&
+    commentField != null &&
+    list != null
+  ) {
     form.addEventListener('submit', (e: Event) => {
       e.preventDefault();
       const listItem = document.createElement('li');
       const namePara = document.createElement('p');
       const commentPara = document.createElement('p');
 
-      // Set text content from input values
       namePara.textContent = nameField.value;
       commentPara.textContent = commentField.value;
 
@@ -42,7 +44,6 @@ export const addComment = (): void => {
       listItem.appendChild(namePara);
       listItem.appendChild(commentPara);
 
-      // Clear the input fields
       nameField.value = '';
       commentField.value = '';
     });
