@@ -46,13 +46,14 @@ export const extractBears = async (wikitext: string): Promise<void> => {
   const moreBearsSection = document.querySelector('.more_bears');
   if (moreBearsSection !== null) {
     bears.forEach((bear: Bear) => {
+      const imageUrl = bear.image !== '' ? bear.image : 'media/placeholder.jpg';
       moreBearsSection.innerHTML += `
-                <div>
-                    <h3>${bear.name} (${bear.binomial})</h3>
-                    <img src="${bear.image}" alt="${bear.name}" style="width:200px; height:auto;">
-                    <p><strong>Range:</strong> ${bear.range}</p>
-                </div>
-            `;
+        <div>
+          <h3>${bear.name} (${bear.binomial})</h3>
+          <img src="${imageUrl}" alt="${bear.name}" style="width:200px; height:auto;">
+          <p class="content"><strong>Range:</strong> ${bear.range}</p>
+        </div>
+        `;
     });
   }
 };
