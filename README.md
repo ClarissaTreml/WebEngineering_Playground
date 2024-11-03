@@ -318,42 +318,60 @@ Use the tools presented in our accessibility workshop to test the accessibility 
 
 Test the current color contrast (text/background), report the results of the test, and then fix them by changing the assigned colors.
 
-_Present your reports here._
+Tools:
+- Developer Tools - Accessibility
+- Lighthouse Report
+- Wave - web accessibility evaluation tool
+
+  One of the first findings of the Lighthouse Report was that the Background and foreground colours do not have a sufficient contrast ratio. The Wave Tool reported 38 contrast errors. After searching for other "green webpages" I inserted the desired background color into the contrast checker of Wave and played around until finding the suitable foreground color. Adequate contrast of text is necessary for all users, especially users with low vision.
 
 **(0.5) Semantic HTML**
 
 Report on what happens when you try to navigate the page using a screen reader. Fix those navigation issues.
 
-_Present your reports here._
+Tools:
+- Developer Tools - Accessibility
+- Lighthouse Report
+- Manual Testing using Voiceover and Keyboard
+- Wave - web accessibility evaluation tool
 
+Form controls did not have a properly associated text label and there were as well navigation issues throughout the page using the screen reader and navigating with only the keyboard. Inserting propper aria-attributes was one way of fixing the issues.
+  
 **(0.5) Audio**
 
 The `<audio>` player isn't accessible to hearing impaired (deaf) people — can you add some kind of accessible alternative for these users?
 
-_Present your findings and fixes here._
+-Missing Transcript for Audio Content: The audio player currently lacks captions or a transcript, which limits accessibility for users who are for example deaf. To address this, a transcript directly below the audio player should be added. Providing a transcript ensures that all users, regardless of their hearing ability, can access the content and understand the audio’s message. Meanwhile, a placeholder was added and the implementation of a transcript still needs to be implemented.
 
 **(1) Forms**
 
 - The `<input>` element in the search form at the top could do with a label, but we don't want to add a visible text label that would potentially spoil the design and isn't really needed by sighted users. Fix this issue by adding a label that is only accessible to screen readers.
 - The two `<input>` elements in the comment form have visible text labels, but they are not unambiguously associated with their labels — how do you achieve this? Note that you'll need to update some of the CSS rule as well.
 
-_Present your findings and fixes here._
+Accessible Label for Search Input: Added a visually hidden label <label for="search-query" class="sr-only">Search our website</label> to the search form input. This sr-only class hides the label visually while keeping it accessible to screen readers, helping users understand the field's purpose.
+
+Associating Labels with Comment Form Inputs: Added for and id attributes to explicitly link labels with input fields in the comment form. This association enhances usability for screen reader users, enabling them to identify labels correctly, and also allows mouse users to focus the input by clicking on the label.
 
 **(0.5) Comment section**
 
 The show/hide comment control button is not currently keyboard-accessible. Can you make it keyboard accessible, both in terms of focusing it using the tab key, and activating it using the return key?
 
-_Present your findings and fixes here._
+- Keyboard Accessibility for "Show/Hide Comments" Button: The "Show/Hide comments" button was initially not accessible via keyboard. To improve accessibility, an event listener for the "key-down" event was added, allowing users to trigger the action using the "Enter" key. This ensures that keyboard-only users can easily toggle the comments section, enhancing overall accessibility.
 
 **(1) The table**
 
 The data table is not currently very accessible — it is hard for screen reader users to associate data rows and columns together, and the table also has no kind of summary to make it clear what it shows. Can you add some features to your HTML to fix this problem?
 
-_Present your findings and fixes here._
+- Enhanced Data Table Accessibility: Added <th> elements with scope attributes and a caption to improve screen reader navigation and provide context for the table’s content.
 
 **(1) More Findings**
 
-What other accessibility issues did you find? Explain how you did fix them.
+- HTML Language Attribute Missing: The <html> element was missing the lang attribute. Adding lang="en" to the <html> tag specifies that English is the primary language of the page. This helps assistive technologies, like screen readers, correctly interpret and pronounce words, enhancing accessibility.
+- Adjusted Placeholder Text: The font size and family of placeholder text were adjusted to enhance readability for users, making it easier for them to interact with form fields.
+- Improved Readability with Sans-Serif Font: The font family was changed to sans-serif to improve readability, especially for those with visual impairments.
+- Increased Font Size for Readability: Font sizes for specific elements were increased to ensure that text is easily readable by all users, improving accessibility.
+- Enhanced Search Button Accessibility: The search button was updated from an input type="submit" to a <button>. This change allows for greater styling flexibility, improving visual consistency and interaction feedback.
+
 
 # Extended Coding Playgrounds
 
