@@ -1,14 +1,14 @@
 /* || General setup */
-
 html,
 body {
   margin: 0;
   padding: 0;
+  font-family: 'Open Sans', sans-serif;
 }
 
 html {
   font-size: 10px;
-  background-color: #dde;
+  background-color: #bde9c8;
 }
 
 body {
@@ -22,53 +22,25 @@ body {
 }
 
 /* || typography */
-
-.font-size-7 {
-  font-size: 4rem;
+h1 {
+  font-size: 8rem;
+  color: #10712f;
   text-align: center;
-  color: white;
-  text-shadow: 2px 2px 10px black;
+  margin-bottom: 20px;
 }
 
-.font-size-6 {
+h2 {
   font-size: 3rem;
-  text-align: center;
+  color: #10712f;
+  margin-bottom: 15px;
+  margin-top: 30px;
 }
 
-.font-size-5 {
-  font-size: 2.2rem;
-}
-
-font[size='7'],
-font[size='6'],
-font[size='5'] {
-  font-family: 'Sonsie One', cursive;
-  color: #2a2a2a;
-}
-
-p,
-input,
-li,
-table,
-label {
-  font-family: 'Open Sans Condensed', sans-serif;
-  color: #2a2a2a;
-}
-
-font[size='7'] {
-  font-size: 4rem;
-  text-align: center;
-  color: white;
-  text-shadow: 2px 2px 10px black;
-}
-
-font[size='6'] {
-  font-size: 3rem;
-  text-align: center;
-}
-
-font[size='5'] {
-  font-size: 2.2rem;
+h3 {
+  font-size: 2.5rem;
+  color: #10712f;
+  margin-bottom: 10px;
+  margin-top: 20px;
 }
 
 p,
@@ -76,15 +48,17 @@ li,
 table {
   font-size: 1.6rem;
   line-height: 1.5;
+  color: #10712f;
+  font-family: 'Open Sans', sans-serif;
+  margin-bottom: 5px;
 }
 
 /* || header layout */
-
 div[class='nav'],
 article,
 footer,
 .secondary {
-  background-color: green;
+  background-color: #bde9c8;
 }
 
 article,
@@ -99,7 +73,7 @@ article {
 
 div[class='nav'] {
   height: 50px;
-  background-color: #ff80ff;
+  background-color: #004d00;
   display: flex;
   padding: 1% 0;
   margin-bottom: 10px;
@@ -123,7 +97,7 @@ div[class='nav'] a {
   font-size: 2rem;
   text-transform: uppercase;
   text-decoration: none;
-  color: black;
+  color: #ffffff;
 }
 
 div[class='nav'] .search {
@@ -152,7 +126,6 @@ div[class='nav'] .search {
 }
 
 /* || main layout */
-
 main {
   display: flex;
 }
@@ -161,19 +134,29 @@ article {
   flex: 5;
 }
 
+.author,
+.content {
+  font-size: 2rem;
+  line-height: 1.8;
+  color: #10712f;
+}
+
 .secondary {
   flex: 2;
+  background-color: #004d00;
+  color: #ffffff;
 }
 
 footer {
   margin-top: 10px;
+  background-color: #004d00;
+  color: #ffffff;
 }
 
 /* Table styling */
-
 table {
   width: 100%;
-  background-color: #dde;
+  background-color: #ffffff;
   border-collapse: collapse;
 }
 
@@ -187,15 +170,41 @@ td {
 }
 
 th[scope='col'] {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #000000;
 }
 
 tbody tr:nth-child(odd) {
-  background-color: #def;
+  background-color: #e0e0e0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  margin-top: 20px;
+}
+
+caption {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 10px;
+  color: #10712f;
+}
+
+th,
+td {
+  border: 1px solid #000000;
+  padding: 10px;
+}
+
+th {
+  background-color: #333333;
+  color: #ffffff;
+  text-align: center;
 }
 
 /* styling content images and audio */
-
 img,
 audio {
   display: block;
@@ -207,14 +216,21 @@ audio {
 }
 
 /* Comments styling */
-
 .comments {
-  background-color: #def;
+  background-color: #e0e0e0;
   padding: 10px;
 }
 
 .show-hide {
   cursor: pointer;
+  text-align: center;
+  width: 150px;
+  background-color: #333333;
+  color: #ffffff;
+  line-height: 32px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
 }
 
 .comments font[size='6'] {
@@ -223,6 +239,7 @@ audio {
 
 .comments font[size='6']:nth-of-type(2) {
   margin-bottom: 0;
+  color: #1a1a1a;
 }
 
 .comment-form {
@@ -248,6 +265,7 @@ audio {
 .show-hide {
   text-align: center;
   width: 150px;
+  color: #ffffff;
 }
 
 .comment-form input,
@@ -261,7 +279,14 @@ audio {
 .show-hide {
   background: #333;
   border: 0;
-  color: white;
+  font-size: 2rem;
+  text-align: center;
+  width: 150px;
+  color: #ffffff;
+  line-height: 32px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
 }
 
 .comment-form input[type='submit'] {
@@ -286,4 +311,109 @@ audio {
 
 .comment-container li p:nth-child(2) {
   flex: 5;
+}
+
+/* Styling for the comment label text */
+.comment-text {
+  font-size: 1.6rem;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.related-title {
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.related-links {
+  list-style-type: none;
+  padding: 0;
+}
+
+.related-links li {
+  margin-bottom: 10px;
+}
+
+.related-links a {
+  font-size: 1.8rem;
+  color: #ffffff;
+  text-decoration: none;
+  transition:
+    color 0.3s,
+    text-decoration 0.3s;
+}
+
+.related-links a:hover,
+.related-links a:focus {
+  color: #ffdd57;
+  text-decoration: underline;
+  outline: none;
+}
+
+.related-links a:focus {
+  outline: 2px dashed #ffdd57;
+}
+
+.transcription {
+  font-size: 1.6rem;
+  color: #e0e0e0;
+  margin-top: 10px;
+}
+
+details {
+  background-color: #333333;
+  padding: 10px;
+  margin-top: 15px;
+}
+
+details summary {
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: #e0e0e0;
+  cursor: pointer;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.search-button {
+  font-size: 1.6rem;
+  padding: 10px 15px;
+  background-color: #333333;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    transform 0.2s;
+}
+
+.search-button:hover,
+.search-button:focus {
+  background-color: #555555;
+  transform: scale(1.05);
+  outline: none;
+}
+
+.search-button:focus {
+  outline: 2px dashed #ffdd57;
+}
+
+#search-query,
+#comment,
+#name::placeholder {
+  font-size: 1.6rem;
+  font-family: 'Open Sans', sans-serif;
+  color: #333333;
 }

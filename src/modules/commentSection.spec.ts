@@ -8,7 +8,7 @@ describe('toggleComments', () => {
   beforeEach((): void => {
     document.body.innerHTML = `
       <button class="show-hide">Show comments</button>
-      <div class="comment-wrapper hidden"></div>
+      <div class="comment-wrapper" id="comment-wrapper"></div>
     `;
 
     showHideBtn = document.querySelector<HTMLButtonElement>('.show-hide');
@@ -17,19 +17,44 @@ describe('toggleComments', () => {
     if (showHideBtn === null || commentWrapper === null) {
       throw new Error('Required elements not found in the DOM');
     }
+
+    toggleComments();
   });
 
-  it('should toggle the visibility of the comment section', (): void => {
+  it('should toggle the visibility of the comment section and update aria attributes on click', (): void => {
     if (showHideBtn !== null && commentWrapper !== null) {
-      toggleComments();
+      expect(showHideBtn.textContent).toBe('Show comments');
+      expect(commentWrapper.style.display).toBe('none');
+      expect(showHideBtn.getAttribute('aria-expanded')).toBe('false');
 
       showHideBtn.click();
       expect(showHideBtn.textContent).toBe('Hide comments');
-      expect(commentWrapper.classList.contains('hidden')).toBe(false);
+      expect(commentWrapper.style.display).toBe('block');
+      expect(showHideBtn.getAttribute('aria-expanded')).toBe('true');
 
       showHideBtn.click();
       expect(showHideBtn.textContent).toBe('Show comments');
-      expect(commentWrapper.classList.contains('hidden')).toBe(true);
+      expect(commentWrapper.style.display).toBe('none');
+      expect(showHideBtn.getAttribute('aria-expanded')).toBe('false');
+    }
+  });
+
+  it('should toggle visibility and aria attributes on Enter and Space keydown events', (): void => {
+    if (showHideBtn !== null && commentWrapper !== null) {
+      expect(showHideBtn.getAttribute('aria-expanded')).toBe('false');
+      expect(commentWrapper.style.display).toBe('none');
+
+      const enterEvent = new KeyboardEvent('keydown', { key: 'Enter' });
+      showHideBtn.dispatchEvent(enterEvent);
+      expect(showHideBtn.textContent).toBe('Hide comments');
+      expect(commentWrapper.style.display).toBe('block');
+      expect(showHideBtn.getAttribute('aria-expanded')).toBe('true');
+
+      const spaceEvent = new KeyboardEvent('keydown', { key: ' ' });
+      showHideBtn.dispatchEvent(spaceEvent);
+      expect(showHideBtn.textContent).toBe('Show comments');
+      expect(commentWrapper.style.display).toBe('none');
+      expect(showHideBtn.getAttribute('aria-expanded')).toBe('false');
     }
   });
 });
